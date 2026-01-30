@@ -119,17 +119,23 @@
             gap: 8px;
             background: #1a1a1a;
             color: #E3F53C;
-            padding: 14px 32px;
+            padding: 18px 48px;
             border-radius: 30px;
-            font-size: 15px;
-            font-weight: 700;
+            font-size: 18px;
+            font-weight: 800;
             text-decoration: none;
             transition: transform 0.2s, box-shadow 0.2s;
-            letter-spacing: 1px;
+            letter-spacing: 2px;
+            box-shadow: 0 4px 16px rgba(0,0,0,0.2);
+            animation: pulse-btn 2s infinite;
+        }
+        @keyframes pulse-btn {
+            0%, 100% { box-shadow: 0 4px 16px rgba(0,0,0,0.2); }
+            50% { box-shadow: 0 8px 32px rgba(227,245,60,0.4); }
         }
         .btn:hover {
-            transform: translateY(-2px);
-            box-shadow: 0 8px 24px rgba(0,0,0,0.2);
+            transform: translateY(-3px);
+            box-shadow: 0 12px 36px rgba(227,245,60,0.5);
         }
         .btn-outline {
             background: transparent;
