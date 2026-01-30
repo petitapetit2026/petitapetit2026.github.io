@@ -1,0 +1,1091 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>P▲P — Turn Every Run Into Art</title>
+    <meta name="description" content="P▲P (Petit a Petit) — An aesthetic running app that turns every run into art. Track, customize, share.">
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+        html {
+            scroll-behavior: smooth;
+        }
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+            background: linear-gradient(135deg, #E3F53C 0%, #D4E62A 100%);
+            padding: 20px;
+            min-height: 100vh;
+        }
+        .site-container {
+            max-width: 900px;
+            margin: 0 auto;
+            display: flex;
+            flex-direction: column;
+            gap: 20px;
+        }
+
+        /* ========== HERO ========== */
+        .hero {
+            background: white;
+            border-radius: 24px;
+            padding: 60px 32px;
+            box-shadow: 0 20px 60px rgba(0,0,0,0.15);
+            text-align: center;
+            position: relative;
+            overflow: hidden;
+        }
+        .hero::before {
+            content: '';
+            position: absolute;
+            top: -80px;
+            right: -80px;
+            width: 200px;
+            height: 200px;
+            background: radial-gradient(circle, rgba(227,245,60,0.3) 0%, transparent 70%);
+            border-radius: 50%;
+        }
+        .hero::after {
+            content: '';
+            position: absolute;
+            bottom: -60px;
+            left: -60px;
+            width: 160px;
+            height: 160px;
+            background: radial-gradient(circle, rgba(227,245,60,0.2) 0%, transparent 70%);
+            border-radius: 50%;
+        }
+        .hero-logo {
+            font-size: 72px;
+            font-weight: 900;
+            color: #1a1a1a;
+            letter-spacing: 12px;
+            position: relative;
+            z-index: 1;
+        }
+        .hero-logo .triangle {
+            color: #1a1a1a;
+        }
+        .hero-tagline {
+            font-size: 20px;
+            color: #444;
+            margin-top: 12px;
+            font-weight: 500;
+            letter-spacing: 2px;
+            position: relative;
+            z-index: 1;
+        }
+        .hero-sub {
+            font-size: 14px;
+            color: #888;
+            margin-top: 8px;
+            position: relative;
+            z-index: 1;
+        }
+        .hero-badges {
+            margin-top: 28px;
+            display: flex;
+            gap: 12px;
+            justify-content: center;
+            flex-wrap: wrap;
+            position: relative;
+            z-index: 1;
+        }
+        .badge-pill {
+            display: inline-flex;
+            align-items: center;
+            gap: 6px;
+            background: #f8f9fa;
+            color: #1a1a1a;
+            padding: 8px 18px;
+            border-radius: 25px;
+            font-size: 13px;
+            font-weight: 600;
+        }
+        .badge-pill.primary {
+            background: linear-gradient(135deg, #E3F53C 0%, #D4E62A 100%);
+        }
+        .hero-cta {
+            margin-top: 32px;
+            position: relative;
+            z-index: 1;
+        }
+        .btn {
+            display: inline-flex;
+            align-items: center;
+            gap: 8px;
+            background: #1a1a1a;
+            color: #E3F53C;
+            padding: 14px 32px;
+            border-radius: 30px;
+            font-size: 15px;
+            font-weight: 700;
+            text-decoration: none;
+            transition: transform 0.2s, box-shadow 0.2s;
+            letter-spacing: 1px;
+        }
+        .btn:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 8px 24px rgba(0,0,0,0.2);
+        }
+        .btn-outline {
+            background: transparent;
+            color: #1a1a1a;
+            border: 2px solid #1a1a1a;
+            margin-left: 12px;
+        }
+        .btn-outline:hover {
+            background: #1a1a1a;
+            color: #E3F53C;
+        }
+
+        /* ========== SECTION CARD ========== */
+        .card {
+            background: white;
+            border-radius: 20px;
+            padding: 32px;
+            box-shadow: 0 20px 60px rgba(0,0,0,0.15);
+        }
+        .card-header {
+            text-align: center;
+            margin-bottom: 24px;
+        }
+        .card-label {
+            display: inline-block;
+            background: linear-gradient(135deg, #E3F53C 0%, #D4E62A 100%);
+            color: #1a1a1a;
+            padding: 4px 14px;
+            border-radius: 20px;
+            font-size: 11px;
+            font-weight: 700;
+            letter-spacing: 2px;
+            text-transform: uppercase;
+        }
+        .card-title {
+            font-size: 28px;
+            font-weight: 800;
+            color: #1a1a1a;
+            margin-top: 12px;
+        }
+        .card-subtitle {
+            font-size: 14px;
+            color: #666;
+            margin-top: 6px;
+        }
+
+        /* ========== FEATURES GRID ========== */
+        .features-grid {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 16px;
+        }
+        .feature-item {
+            background: #f8f9fa;
+            border-radius: 16px;
+            padding: 24px;
+            transition: transform 0.2s;
+        }
+        .feature-item:hover {
+            transform: translateY(-4px);
+        }
+        .feature-icon {
+            width: 48px;
+            height: 48px;
+            background: linear-gradient(135deg, #E3F53C 0%, #D4E62A 100%);
+            border-radius: 14px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 22px;
+            margin-bottom: 14px;
+        }
+        .feature-name {
+            font-size: 16px;
+            font-weight: 700;
+            color: #1a1a1a;
+            margin-bottom: 6px;
+        }
+        .feature-desc {
+            font-size: 13px;
+            color: #666;
+            line-height: 1.5;
+        }
+
+        /* ========== PHONE MOCKUP ========== */
+        .phones-section {
+            display: flex;
+            justify-content: center;
+            gap: 24px;
+            flex-wrap: wrap;
+            padding: 20px 0;
+        }
+        .phone-frame {
+            width: 180px;
+            height: 360px;
+            background: #1a1a1a;
+            border-radius: 28px;
+            padding: 8px;
+            box-shadow: 0 12px 40px rgba(0,0,0,0.2);
+            position: relative;
+        }
+        .phone-notch {
+            position: absolute;
+            top: 8px;
+            left: 50%;
+            transform: translateX(-50%);
+            width: 60px;
+            height: 20px;
+            background: #1a1a1a;
+            border-radius: 0 0 12px 12px;
+            z-index: 10;
+        }
+        .phone-screen {
+            width: 100%;
+            height: 100%;
+            border-radius: 20px;
+            overflow: hidden;
+            position: relative;
+        }
+        /* Screen 1: Home */
+        .screen-home {
+            background: linear-gradient(135deg, #E3F53C 0%, #D4E62A 100%);
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            padding: 16px;
+        }
+        .screen-home .s-logo {
+            font-size: 28px;
+            font-weight: 900;
+            color: #1a1a1a;
+            letter-spacing: 4px;
+        }
+        .screen-home .s-greeting {
+            font-size: 10px;
+            color: #333;
+            margin-top: 16px;
+            font-weight: 600;
+        }
+        .screen-home .s-quote-card {
+            background: rgba(26,26,26,0.08);
+            border-radius: 10px;
+            padding: 10px;
+            margin-top: 8px;
+            width: 100%;
+        }
+        .screen-home .s-quote-label {
+            font-size: 7px;
+            color: #666;
+            letter-spacing: 2px;
+            text-transform: uppercase;
+        }
+        .screen-home .s-quote-text {
+            font-size: 9px;
+            color: #1a1a1a;
+            margin-top: 4px;
+            font-style: italic;
+            line-height: 1.4;
+        }
+        .screen-home .s-menu {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 6px;
+            width: 100%;
+            margin-top: 12px;
+        }
+        .screen-home .s-menu-item {
+            background: white;
+            border-radius: 8px;
+            padding: 8px 6px;
+            text-align: center;
+        }
+        .screen-home .s-menu-icon {
+            font-size: 10px;
+            font-weight: 800;
+            color: #1a1a1a;
+        }
+        .screen-home .s-menu-label {
+            font-size: 7px;
+            color: #666;
+            margin-top: 2px;
+        }
+        /* Screen 2: Running Map */
+        .screen-map {
+            background: #2c3e50;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            position: relative;
+        }
+        .screen-map .map-circle {
+            width: 130px;
+            height: 130px;
+            border-radius: 50%;
+            background: radial-gradient(circle at 40% 40%, #3a7ca5 0%, #1a3a4a 60%, #0d1b24 100%);
+            position: relative;
+            box-shadow: 0 0 30px rgba(58,124,165,0.3);
+        }
+        .screen-map .map-route {
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            width: 60px;
+            height: 60px;
+        }
+        .screen-map .map-route svg {
+            width: 100%;
+            height: 100%;
+        }
+        .screen-map .map-stats {
+            display: flex;
+            gap: 16px;
+            margin-top: 20px;
+        }
+        .screen-map .stat {
+            text-align: center;
+        }
+        .screen-map .stat-val {
+            font-size: 16px;
+            font-weight: 800;
+            color: #E3F53C;
+        }
+        .screen-map .stat-label {
+            font-size: 7px;
+            color: rgba(255,255,255,0.5);
+            text-transform: uppercase;
+            letter-spacing: 1px;
+        }
+        .screen-map .map-btn {
+            margin-top: 16px;
+            background: #E3F53C;
+            color: #1a1a1a;
+            border: none;
+            padding: 6px 24px;
+            border-radius: 16px;
+            font-size: 10px;
+            font-weight: 800;
+        }
+        /* Screen 3: Share Card */
+        .screen-share {
+            background: #f0f0f0;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            padding: 16px;
+        }
+        .screen-share .share-card-mock {
+            width: 120px;
+            height: 160px;
+            background: linear-gradient(135deg, #E3F53C 0%, #D4E62A 100%);
+            border-radius: 12px;
+            padding: 10px;
+            display: flex;
+            flex-direction: column;
+            justify-content: space-between;
+        }
+        .screen-share .sc-top {
+            display: flex;
+            justify-content: space-between;
+            align-items: flex-start;
+        }
+        .screen-share .sc-logo {
+            font-size: 8px;
+            font-weight: 900;
+            color: #1a1a1a;
+            letter-spacing: 1px;
+        }
+        .screen-share .sc-date {
+            font-size: 6px;
+            color: #333;
+        }
+        .screen-share .sc-route {
+            width: 50px;
+            height: 50px;
+            background: rgba(26,26,26,0.08);
+            border-radius: 50%;
+            margin: 0 auto;
+        }
+        .screen-share .sc-bottom {
+            display: flex;
+            justify-content: space-between;
+        }
+        .screen-share .sc-stat {
+            text-align: center;
+        }
+        .screen-share .sc-val {
+            font-size: 10px;
+            font-weight: 800;
+            color: #1a1a1a;
+        }
+        .screen-share .sc-unit {
+            font-size: 5px;
+            color: #333;
+        }
+        .screen-share .share-label {
+            margin-top: 12px;
+            font-size: 9px;
+            color: #666;
+            font-weight: 600;
+        }
+        .screen-share .share-note {
+            font-size: 7px;
+            color: #999;
+            margin-top: 2px;
+        }
+
+        /* ========== HOW IT WORKS ========== */
+        .steps-row {
+            display: flex;
+            gap: 16px;
+            align-items: stretch;
+        }
+        .step-item {
+            flex: 1;
+            background: #f8f9fa;
+            border-radius: 16px;
+            padding: 24px 18px;
+            text-align: center;
+            position: relative;
+        }
+        .step-number {
+            width: 32px;
+            height: 32px;
+            background: linear-gradient(135deg, #E3F53C 0%, #D4E62A 100%);
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 14px;
+            font-weight: 800;
+            color: #1a1a1a;
+            margin: 0 auto 12px;
+        }
+        .step-icon {
+            font-size: 28px;
+            margin-bottom: 10px;
+        }
+        .step-name {
+            font-size: 15px;
+            font-weight: 700;
+            color: #1a1a1a;
+            margin-bottom: 6px;
+        }
+        .step-desc {
+            font-size: 12px;
+            color: #666;
+            line-height: 1.5;
+        }
+        .step-arrow {
+            position: absolute;
+            right: -20px;
+            top: 50%;
+            transform: translateY(-50%);
+            font-size: 18px;
+            color: #ccc;
+            font-weight: 700;
+            z-index: 1;
+        }
+
+        /* ========== THEMES SHOWCASE ========== */
+        .themes-row {
+            display: flex;
+            gap: 10px;
+            justify-content: center;
+            flex-wrap: wrap;
+            margin-top: 8px;
+        }
+        .theme-dot {
+            width: 42px;
+            height: 42px;
+            border-radius: 50%;
+            box-shadow: 0 4px 12px rgba(0,0,0,0.15);
+            transition: transform 0.2s;
+            cursor: pointer;
+        }
+        .theme-dot:hover {
+            transform: scale(1.15);
+        }
+
+        /* ========== USER GUIDE ========== */
+        .guide-grid {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 16px;
+        }
+        .guide-section {
+            background: #f8f9fa;
+            border-radius: 14px;
+            padding: 18px;
+        }
+        .guide-title {
+            font-size: 15px;
+            font-weight: 700;
+            color: #1a1a1a;
+            margin-bottom: 10px;
+            display: flex;
+            align-items: center;
+            gap: 6px;
+        }
+        .guide-list, .guide-steps {
+            list-style: none;
+            padding: 0;
+        }
+        .guide-list li, .guide-steps li {
+            font-size: 13px;
+            color: #444;
+            padding: 4px 0 4px 18px;
+            position: relative;
+            line-height: 1.5;
+        }
+        .guide-list li::before {
+            content: "•";
+            color: #E3F53C;
+            font-weight: bold;
+            position: absolute;
+            left: 2px;
+        }
+        .guide-steps {
+            counter-reset: guide-step;
+        }
+        .guide-steps li::before {
+            content: counter(guide-step);
+            counter-increment: guide-step;
+            background: #E3F53C;
+            color: #1a1a1a;
+            width: 16px;
+            height: 16px;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 10px;
+            font-weight: 700;
+            position: absolute;
+            left: 0;
+            top: 5px;
+        }
+        .guide-section strong {
+            color: #1a1a1a;
+        }
+
+        /* ========== OG PARTNER CTA ========== */
+        .og-section {
+            background: linear-gradient(135deg, #1a1a1a 0%, #2d2d2d 100%);
+            border-radius: 20px;
+            padding: 40px 32px;
+            box-shadow: 0 20px 60px rgba(0,0,0,0.3);
+            text-align: center;
+        }
+        .og-badge-big {
+            display: inline-block;
+            background: linear-gradient(135deg, #E3F53C 0%, #D4E62A 100%);
+            color: #1a1a1a;
+            padding: 6px 20px;
+            border-radius: 20px;
+            font-size: 12px;
+            font-weight: 700;
+            letter-spacing: 2px;
+        }
+        .og-title {
+            font-size: 28px;
+            font-weight: 800;
+            color: #fff;
+            margin-top: 16px;
+        }
+        .og-title span {
+            color: #E3F53C;
+        }
+        .og-subtitle {
+            font-size: 14px;
+            color: rgba(255,255,255,0.6);
+            margin-top: 8px;
+        }
+        .og-perks {
+            display: flex;
+            gap: 16px;
+            justify-content: center;
+            margin-top: 24px;
+            flex-wrap: wrap;
+        }
+        .og-perk {
+            background: rgba(255,255,255,0.08);
+            border-radius: 14px;
+            padding: 18px 20px;
+            flex: 1;
+            min-width: 200px;
+            max-width: 260px;
+        }
+        .og-perk-icon {
+            font-size: 24px;
+            margin-bottom: 8px;
+        }
+        .og-perk-title {
+            font-size: 14px;
+            font-weight: 700;
+            color: #E3F53C;
+            margin-bottom: 4px;
+        }
+        .og-perk-desc {
+            font-size: 12px;
+            color: rgba(255,255,255,0.5);
+            line-height: 1.5;
+        }
+        .og-cta {
+            margin-top: 28px;
+        }
+        .btn-glow {
+            display: inline-flex;
+            align-items: center;
+            gap: 8px;
+            background: #E3F53C;
+            color: #1a1a1a;
+            padding: 14px 36px;
+            border-radius: 30px;
+            font-size: 15px;
+            font-weight: 800;
+            text-decoration: none;
+            letter-spacing: 1px;
+            transition: transform 0.2s, box-shadow 0.2s;
+            box-shadow: 0 0 20px rgba(227,245,60,0.3);
+        }
+        .btn-glow:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 0 40px rgba(227,245,60,0.5);
+        }
+        .og-note {
+            font-size: 12px;
+            color: rgba(255,255,255,0.3);
+            margin-top: 16px;
+        }
+
+        /* ========== FOOTER ========== */
+        .footer {
+            background: white;
+            border-radius: 20px;
+            padding: 28px 32px;
+            box-shadow: 0 20px 60px rgba(0,0,0,0.15);
+            text-align: center;
+        }
+        .footer-logo {
+            font-size: 24px;
+            font-weight: 900;
+            color: #1a1a1a;
+            letter-spacing: 4px;
+        }
+        .footer-tagline {
+            font-size: 12px;
+            color: #888;
+            margin-top: 4px;
+            letter-spacing: 1px;
+        }
+        .footer-links {
+            margin-top: 16px;
+            display: flex;
+            gap: 24px;
+            justify-content: center;
+            flex-wrap: wrap;
+        }
+        .footer-link {
+            font-size: 13px;
+            color: #666;
+            text-decoration: none;
+            transition: color 0.2s;
+        }
+        .footer-link:hover {
+            color: #1a1a1a;
+        }
+        .footer-copy {
+            margin-top: 16px;
+            font-size: 11px;
+            color: #bbb;
+        }
+
+        /* ========== SCROLL ANIMATIONS ========== */
+        .fade-in {
+            opacity: 0;
+            transform: translateY(20px);
+            transition: opacity 0.6s ease, transform 0.6s ease;
+        }
+        .fade-in.visible {
+            opacity: 1;
+            transform: translateY(0);
+        }
+
+        /* ========== RESPONSIVE ========== */
+        @media (max-width: 640px) {
+            body {
+                padding: 12px;
+            }
+            .hero {
+                padding: 40px 20px;
+            }
+            .hero-logo {
+                font-size: 48px;
+                letter-spacing: 8px;
+            }
+            .hero-tagline {
+                font-size: 16px;
+            }
+            .hero-cta {
+                display: flex;
+                flex-direction: column;
+                align-items: center;
+                gap: 12px;
+            }
+            .btn-outline {
+                margin-left: 0;
+            }
+            .features-grid {
+                grid-template-columns: 1fr;
+            }
+            .phones-section {
+                gap: 16px;
+            }
+            .phone-frame {
+                width: 150px;
+                height: 300px;
+            }
+            .steps-row {
+                flex-direction: column;
+            }
+            .step-arrow {
+                display: none;
+            }
+            .card {
+                padding: 24px 18px;
+            }
+            .card-title {
+                font-size: 22px;
+            }
+            .og-section {
+                padding: 32px 20px;
+            }
+            .og-title {
+                font-size: 22px;
+            }
+            .guide-grid {
+                grid-template-columns: 1fr;
+            }
+            .og-perks {
+                flex-direction: column;
+                align-items: center;
+            }
+            .og-perk {
+                max-width: 100%;
+            }
+        }
+    </style>
+</head>
+<body>
+
+<div class="site-container">
+
+    <!-- HERO -->
+    <section class="hero">
+        <div class="hero-logo">P<span class="triangle">▲</span>P</div>
+        <div class="hero-tagline">Turn Every Run Into Art</div>
+        <div class="hero-sub">Petit a Petit — Step by step, one run at a time</div>
+        <div class="hero-badges">
+            <span class="badge-pill primary">iOS App</span>
+            <span class="badge-pill">SwiftUI</span>
+            <span class="badge-pill">Artistic Design</span>
+        </div>
+        <div class="hero-cta">
+            <a href="https://testflight.apple.com/join/sJGGC9gF" class="btn">Join Beta</a>
+            <a href="#features" class="btn btn-outline">Learn More</a>
+        </div>
+    </section>
+
+    <!-- FEATURES -->
+    <section class="card fade-in" id="features">
+        <div class="card-header">
+            <span class="card-label">Features</span>
+            <h2 class="card-title">Not Your Typical Running App</h2>
+            <p class="card-subtitle">Designed for runners who appreciate aesthetics</p>
+        </div>
+        <div class="features-grid">
+            <div class="feature-item">
+                <div class="feature-icon">🖼️</div>
+                <div class="feature-name">Transparent Share Cards</div>
+                <div class="feature-desc">80+ stickers to freely decorate your run card — save as transparent PNG and layer on any photo</div>
+            </div>
+            <div class="feature-item">
+                <div class="feature-icon">🗺️</div>
+                <div class="feature-name">3D Circle Map</div>
+                <div class="feature-desc">A unique circular navigation view with real-time route tracking and smooth compass</div>
+            </div>
+            <div class="feature-item">
+                <div class="feature-icon">🎨</div>
+                <div class="feature-name">Theme Colors</div>
+                <div class="feature-desc">10 hand-picked color themes — from neon lime to midnight noir — make it yours</div>
+            </div>
+            <div class="feature-item">
+                <div class="feature-icon">💬</div>
+                <div class="feature-name">Daily Quotes</div>
+                <div class="feature-desc">Start every run with an inspirational quote. Collect and save your favorites</div>
+            </div>
+        </div>
+    </section>
+
+    <!-- APP PREVIEW -->
+    <section class="card fade-in">
+        <div class="card-header">
+            <span class="card-label">Preview</span>
+            <h2 class="card-title">See It In Action</h2>
+            <p class="card-subtitle">Three screens that define the P▲P experience</p>
+        </div>
+        <div class="phones-section">
+            <!-- Phone 1: Home -->
+            <div class="phone-frame">
+                <div class="phone-notch"></div>
+                <div class="phone-screen screen-home">
+                    <div class="s-logo">P▲P</div>
+                    <div class="s-greeting">Hello, Runner</div>
+                    <div class="s-quote-card">
+                        <div class="s-quote-label">Daily Quote</div>
+                        <div class="s-quote-text">"The miracle isn't that I finished. The miracle is that I had the courage to start."</div>
+                    </div>
+                    <div class="s-menu">
+                        <div class="s-menu-item">
+                            <div class="s-menu-icon">GO</div>
+                            <div class="s-menu-label">Let's Run!</div>
+                        </div>
+                        <div class="s-menu-item">
+                            <div class="s-menu-icon">REC</div>
+                            <div class="s-menu-label">Records</div>
+                        </div>
+                        <div class="s-menu-item">
+                            <div class="s-menu-icon">SAY</div>
+                            <div class="s-menu-label">Quotes</div>
+                        </div>
+                        <div class="s-menu-item">
+                            <div class="s-menu-icon">ME</div>
+                            <div class="s-menu-label">Profile</div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <!-- Phone 2: Running Map -->
+            <div class="phone-frame">
+                <div class="phone-notch"></div>
+                <div class="phone-screen screen-map">
+                    <div class="map-circle">
+                        <div class="map-route">
+                            <svg viewBox="0 0 60 60" fill="none">
+                                <path d="M15 45 Q20 30 25 25 Q30 20 35 22 Q40 24 42 18 Q44 12 48 15" stroke="#E3F53C" stroke-width="2.5" stroke-linecap="round" fill="none"/>
+                                <circle cx="48" cy="15" r="3" fill="#E3F53C"/>
+                            </svg>
+                        </div>
+                    </div>
+                    <div class="map-stats">
+                        <div class="stat">
+                            <div class="stat-val">3.24</div>
+                            <div class="stat-label">KM</div>
+                        </div>
+                        <div class="stat">
+                            <div class="stat-val">18:42</div>
+                            <div class="stat-label">TIME</div>
+                        </div>
+                        <div class="stat">
+                            <div class="stat-val">5'46"</div>
+                            <div class="stat-label">PACE</div>
+                        </div>
+                    </div>
+                    <div class="map-btn">RUNNING</div>
+                </div>
+            </div>
+            <!-- Phone 3: Share Card -->
+            <div class="phone-frame">
+                <div class="phone-notch"></div>
+                <div class="phone-screen screen-share">
+                    <div class="share-card-mock">
+                        <div class="sc-top">
+                            <div class="sc-logo">P▲P</div>
+                            <div class="sc-date">Jan 30</div>
+                        </div>
+                        <div class="sc-route"></div>
+                        <div class="sc-bottom">
+                            <div class="sc-stat">
+                                <div class="sc-val">3.24</div>
+                                <div class="sc-unit">KM</div>
+                            </div>
+                            <div class="sc-stat">
+                                <div class="sc-val">18:42</div>
+                                <div class="sc-unit">TIME</div>
+                            </div>
+                            <div class="sc-stat">
+                                <div class="sc-val">5'46"</div>
+                                <div class="sc-unit">PACE</div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="share-label">Transparent PNG</div>
+                    <div class="share-note">Layer on any photo</div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- HOW IT WORKS -->
+    <section class="card fade-in">
+        <div class="card-header">
+            <span class="card-label">How It Works</span>
+            <h2 class="card-title">Three Simple Steps</h2>
+        </div>
+        <div class="steps-row">
+            <div class="step-item">
+                <div class="step-number">1</div>
+                <div class="step-icon">🏃‍♀️</div>
+                <div class="step-name">Run</div>
+                <div class="step-desc">Hit GO and start running. Real-time GPS tracking with a beautiful 3D circular map.</div>
+                <span class="step-arrow">›</span>
+            </div>
+            <div class="step-item">
+                <div class="step-number">2</div>
+                <div class="step-icon">✨</div>
+                <div class="step-name">Customize</div>
+                <div class="step-desc">Pick a share card layout, add stickers, choose your theme. Make it uniquely yours.</div>
+                <span class="step-arrow">›</span>
+            </div>
+            <div class="step-item">
+                <div class="step-number">3</div>
+                <div class="step-icon">📱</div>
+                <div class="step-name">Share</div>
+                <div class="step-desc">Save as transparent PNG and layer it on any Instagram story or post. Share is marketing.</div>
+            </div>
+        </div>
+    </section>
+
+    <!-- THEMES -->
+    <section class="card fade-in">
+        <div class="card-header">
+            <span class="card-label">Themes</span>
+            <h2 class="card-title">10 Color Themes</h2>
+            <p class="card-subtitle">From vibrant neon to elegant noir — express your style</p>
+        </div>
+        <div class="themes-row">
+            <div class="theme-dot" style="background: linear-gradient(135deg, #E3F53C, #D4E62A);" title="Lime (Default)"></div>
+            <div class="theme-dot" style="background: linear-gradient(135deg, #FF6B9D, #C44569);" title="Blush"></div>
+            <div class="theme-dot" style="background: linear-gradient(135deg, #FF9A76, #FF6348);" title="Coral"></div>
+            <div class="theme-dot" style="background: linear-gradient(135deg, #FFB347, #FF6700);" title="Sunset"></div>
+            <div class="theme-dot" style="background: linear-gradient(135deg, #A8E6CF, #3D9970);" title="Mint"></div>
+            <div class="theme-dot" style="background: linear-gradient(135deg, #87CEEB, #4A90D9);" title="Sky"></div>
+            <div class="theme-dot" style="background: linear-gradient(135deg, #DDA0DD, #9B59B6);" title="Lavender"></div>
+            <div class="theme-dot" style="background: linear-gradient(135deg, #F8C8DC, #FFB6C1);" title="Pink"></div>
+            <div class="theme-dot" style="background: linear-gradient(135deg, #2C3E50, #1a1a2e);" title="Midnight"></div>
+            <div class="theme-dot" style="background: linear-gradient(135deg, #333333, #111111);" title="Noir"></div>
+        </div>
+    </section>
+
+    <!-- USER GUIDE -->
+    <section class="card fade-in" id="guide">
+        <div class="card-header">
+            <span class="card-label">User Guide</span>
+            <h2 class="card-title">How To Use P▲P</h2>
+            <p class="card-subtitle">Everything you need to know in one place</p>
+        </div>
+        <div class="guide-grid">
+            <div class="guide-section">
+                <div class="guide-title">🏠 Home</div>
+                <ul class="guide-list">
+                    <li><strong>Let's Run!</strong> — Start running</li>
+                    <li><strong>Run History</strong> — Running records</li>
+                    <li><strong>Daily Quotes</strong> — Daily inspiration</li>
+                    <li><strong>Profile</strong> — Profile &amp; settings</li>
+                    <li><strong>Tip Jar</strong> — Themes &amp; sticker shop</li>
+                </ul>
+            </div>
+            <div class="guide-section">
+                <div class="guide-title">🏃‍♀️ Start Running</div>
+                <ol class="guide-steps">
+                    <li>Tap <strong>"Let's Run!"</strong> on the home screen</li>
+                    <li>Wait for GPS to be ready (green dot)</li>
+                    <li>Tap <strong>"Start"</strong> to begin running</li>
+                    <li>Tap <strong>"Pause"</strong> to pause / <strong>"Finish"</strong> to end</li>
+                </ol>
+            </div>
+            <div class="guide-section">
+                <div class="guide-title">📸 Share Your Run</div>
+                <ol class="guide-steps">
+                    <li>After finishing, you'll see the share card</li>
+                    <li>Swipe left/right to change layout</li>
+                    <li>Tap <strong>"Add Sticker"</strong> to decorate</li>
+                    <li>Tap <strong>"Save"</strong> to save as transparent PNG</li>
+                </ol>
+            </div>
+            <div class="guide-section">
+                <div class="guide-title">🎨 Change Theme Color</div>
+                <ol class="guide-steps">
+                    <li>Go to <strong>Profile → Tip Jar</strong></li>
+                    <li>Tap <strong>"Themes"</strong></li>
+                    <li>Select your favorite color</li>
+                    <li>Locked colors can be unlocked in Packages</li>
+                </ol>
+            </div>
+        </div>
+    </section>
+
+    <!-- OG PARTNER -->
+    <section class="og-section fade-in" id="join">
+        <div class="og-badge-big">EARLY ACCESS</div>
+        <h2 class="og-title">Become a P▲P <span>OG Partner</span></h2>
+        <p class="og-subtitle">Join before launch and get exclusive rewards</p>
+        <div class="og-perks">
+            <div class="og-perk">
+                <div class="og-perk-icon">🏷️</div>
+                <div class="og-perk-title">OG Partner Status</div>
+                <div class="og-perk-desc">Exclusive early supporter recognition — forever part of the founding crew</div>
+            </div>
+            <div class="og-perk">
+                <div class="og-perk-icon">🎁</div>
+                <div class="og-perk-title">Lifetime VIP</div>
+                <div class="og-perk-desc">All premium features unlocked forever — themes, stickers, and every future update</div>
+            </div>
+            <div class="og-perk">
+                <div class="og-perk-icon">🌟</div>
+                <div class="og-perk-title">Featured Runner</div>
+                <div class="og-perk-desc">Get featured on our official Instagram highlights as an OG Runner</div>
+            </div>
+        </div>
+        <div class="og-cta">
+            <a href="https://testflight.apple.com/join/sJGGC9gF" class="btn-glow">Join TestFlight Now</a>
+        </div>
+        <p class="og-note">Limited spots · Only available before official launch</p>
+    </section>
+
+    <!-- FOOTER -->
+    <footer class="footer">
+        <div class="footer-logo">P▲P</div>
+        <div class="footer-tagline">Petit a Petit · Turn Every Run Into Art</div>
+        <div class="footer-links">
+            <a href="https://testflight.apple.com/join/sJGGC9gF" class="footer-link">TestFlight</a>
+            <a href="https://www.instagram.com/petitapetit2026/" class="footer-link">Instagram</a>
+            <a href="mailto:petitapetit.team@gmail.com" class="footer-link">Contact</a>
+        </div>
+        <div class="footer-copy">&copy; 2026 P▲P (Petit a Petit). All rights reserved.</div>
+    </footer>
+
+</div>
+
+<script>
+    // Scroll animation
+    const observer = new IntersectionObserver((entries) => {
+        entries.forEach(entry => {
+            if (entry.isIntersecting) {
+                entry.target.classList.add('visible');
+            }
+        });
+    }, { threshold: 0.1 });
+
+    document.querySelectorAll('.fade-in').forEach(el => observer.observe(el));
+</script>
+
+</body>
+</html>
