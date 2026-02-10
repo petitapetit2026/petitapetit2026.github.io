@@ -11,7 +11,8 @@
         :root{--lime:#E3F53C;--navy:#1B1464;--bg:#fafafa;--card:#fff;--text:#333;--sub:#666}
         body{font-family:'Nunito',sans-serif;background:var(--bg);color:var(--text);line-height:1.8}
         .header{background:var(--navy);padding:40px 20px;text-align:center}
-        .header .logo{font-size:32px;font-weight:900;color:var(--lime);letter-spacing:3px}
+        .header .logo{font-size:32px;font-weight:900;color:var(--lime);letter-spacing:3px;display:flex;align-items:center;justify-content:center;gap:2px}
+        .header .logo svg{width:28px;height:26px;position:relative;top:-2px}
         .header h1{font-size:24px;font-weight:800;color:#fff;margin-top:8px}
         .header .updated{font-size:13px;color:rgba(255,255,255,0.4);margin-top:4px}
         .container{max-width:720px;margin:0 auto;padding:32px 20px 60px}
@@ -33,7 +34,7 @@
 <body>
 
 <div class="header">
-    <div class="logo">P&#9650;P</div>
+    <div class="logo">P<svg viewBox="0 0 20 17"><path d="M10 1.5 C12 2.5 15 6 17 11.5 C18.5 14.5 17.5 16.5 14.5 16.5 L5.5 16.5 C2.5 16.5 1.5 14.5 3 11.5 C5 6 8 2.5 10 1.5 Z" fill="#E3F53C"/></svg>P</div>
     <h1>Privacy Policy</h1>
     <div class="updated">Last updated: January 2026</div>
 </div>
